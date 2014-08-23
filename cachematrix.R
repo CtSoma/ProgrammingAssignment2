@@ -3,7 +3,7 @@
 ## Date   : Aug 23rd, 2014
 ## Description:
 ## The makeCacheMatrix takes in a Square matrix as input
-## input of the form f <-makeCacheMatrix(c(1,2,3,4),2,2)
+## input of the form f <-makeCacheMatrix(matrix(c(1,2,3,4),2,2))
 ## The number of numeric inputs has to be square value like 4, 9, 16, 25, 36, 49, 64
 ##  and equally distributed between columns and rows.
 ## Also the determinant of the eventual matrix arranged Column wise should not equate to Zero.
@@ -13,7 +13,8 @@
 ##
 ## make Cache Matrix is similar to make vector function, it has four main functions
 ## set, get, SetInverse, getInverse,
-## these can be called as f$set(), f$get(), f$setInverse(), f$getInverse()
+## these can be called as f$set(matrix(c(3,4,1,2),2,2)), f$get(),
+## f$setInverse(matrix(c(0,1,1,0),2,2)), f$getInverse()
 
 makeCacheMatrix <- function(x = matrix()) {
         invMatrix <- NULL  ## initial Null for the Inverse Matrix,
@@ -54,26 +55,26 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
         invMatrix <- x$getInverse()
-        if(!is.null(invMatrix)) {
-                message("getting cached data")
-                return(invMatrix)
+        if(!is.null(invMatrix)) {                     ## checks if the current invMatrix is not null
+                message("getting cached data")        ##prints the message if its getting from Cache
+                return(invMatrix)                     ## returns the value and terminates the program
         }
-        data <- x$get()  ## gets the input matrix and assigns to data
-        dimenSion <- dim(data) ## gets the dimensions of input matrix
+        data <- x$get()                               ## gets the input matrix and assigns to data
+        dimenSion <- dim(data)                        ## gets the dimensions of input matrix
 
-       if(dimenSion[1] == dimenSion[2]) { ## this check done to check if the given
-                                          ## matrix is a square matrix
-                if(det(data) != 0 ) {  ## this check done to check if the
-                                       ## determinant is not 0
+       if(dimenSion[1] == dimenSion[2]) {             ## this check is done to check if the given
+                                                      ## matrix is a square matrix
+                if(det(data) != 0 ) {                 ## this check is done to check if the
+                                                      ## determinant is not 0
                         invMatrix <- solve(data, ...) ## calculate inverse
                         x$setInverse(invMatrix)
-                        invMatrix
+                        return(invMatrix)             ## displays the solved matrix and terminates function
                                     }
-                        else  ## when determinant is Zero
+                        else                          ## when determinant is Zero
         {message("determinant of given Matrix is 0, this matrix will not have Inverse") }
        }
-        else { ## when the dimension of the input matrix do not match
+        else {                                        ## when the dimension of the input matrix do not match
                 message("Given Matrix is not a Square Matrix")
              }
-        data ## display the given matrix
+        data ## display the given matrix in case of Errors
 }

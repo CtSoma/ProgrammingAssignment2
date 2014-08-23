@@ -103,3 +103,14 @@ In order to complete this assignment, you must do the following:
 ### Grading
 
 This assignment will be graded via peer assessment.
+
+
+## Description:
+### The makeCacheMatrix takes in a Square matrix as input
+### input of the form f <-makeCacheMatrix(matrix(c(1,2,3,4),2,2))
+### The number of numeric inputs has to be square value like 4, 9, 16, 25, 36, 49, 64
+###  and equally distributed between columns and rows.
+### Also the determinant of the eventual matrix arranged Column wise should not equate to Zero.
+### Matrices with determinant of Zero do not have an inverse.
+### CacheSolve calculates the inverse of the the given matrix and keeps in memory.
+### If the matrix remains same, the inverse will be retrieved from memory, else it will be calculated.
